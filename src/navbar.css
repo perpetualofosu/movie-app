@@ -1,0 +1,81 @@
+.navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-container {
+    position: relative;
+  }
+  
+  .search-icon {
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .search-input {
+    display: none;
+    position: absolute;
+    top: -5px;
+    right: 0;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+  }
+  
+  .search-container:hover .search-input {
+    display: inline-block;
+  }
+  
+  .dropdown {
+    margin-left: 15px;
+  }
+
+ 
+  
+  .navbar {
+    transition: background-color 0.3s;
+  }
+  
+  .navbar-transparent {
+    background-color: transparent;
+  }
+  
+  .navbar-dark {
+    background-color: #333;
+    color: white
+  }
+
+  .navbar-brand{
+    color: purple;
+    font-family: cursive;
+ }
+.offcanvas-header{
+    background-color: rgb(52, 2, 39);
+}
+ .offcanvas-body{
+    background-image: url('/src/Polygon Luminary.svg');
+    color:white; 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat
+ }
+ .sidebarlist{
+    list-style: none;
+    margin-top: 10px;
+    margin-left: 0;
+
+ }
+ .sidebarlist li{
+    margin-bottom: 15px;
+ }
+
+
+ .btn-secondary{
+    background-color: transparent;
+    border: none;
+ }
