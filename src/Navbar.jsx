@@ -103,7 +103,7 @@ export default function CustomNavbar() {
           </div>
           <div className="dropdown">
             <button
-              className="btn btn-secondary dropdown-toggle"
+              className="btn"
               type="button"
               id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
@@ -117,31 +117,14 @@ export default function CustomNavbar() {
           </div>
           <div className="dropdown">
             <button
-              className="btn btn-secondary dropdown-toggle"
+              className="btn "
               type="button"
               id="dropdownMenuButton2"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <img
-                alt=""
-              />
+              🤷🏼‍♀️
             </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-              <li>
-                <a className="dropdown-item" href="#"></a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
