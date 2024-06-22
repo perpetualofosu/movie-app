@@ -4,7 +4,7 @@ body {
     background-size: cover;
     height: 100vh;
     overflow: hidden;
-    margin: 0; /* Ensure there is no default margin */
+    margin: 0;
 }
 
 .container-fluid {
