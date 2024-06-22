@@ -23,8 +23,8 @@ export default function CustomNavbar() {
   }, []);
 
   return (
-    <nav className={`navbar fixed-top ${staticnav}`}>
-      <div className="container-fluid">
+    <nav className={`navbar fixed-top ${staticnav} `}>
+      <div className="container">
         <div className="navbar-left">
           <button
             className="btn btn-secondary"

@@ -4,7 +4,7 @@ import './SignUpCard.css';
 
 const SignUpCard = () => {
     return (
-        <div class="container-fluid">
+        <div class="container-fluid styles">
         <div className="card glass-card p-4">
             <h3 className="text-center mb-3">Sign Up</h3>
             <form>

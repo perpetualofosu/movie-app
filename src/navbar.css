@@ -35,10 +35,10 @@
     margin-left: 15px;
   }
 
- 
   
   .navbar {
     transition: background-color 0.3s;
+   
   }
   
   .navbar-transparent {
@@ -46,7 +46,7 @@
   }
   
   .navbar-dark {
-    background-color: #333;
+    background-color: black;
     color: white
   }
 
