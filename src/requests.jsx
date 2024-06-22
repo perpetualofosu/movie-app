@@ -1,4 +1,4 @@
-const Key = 'eab615197efa946b7ae33af6c2ce1b61'
+export const Key = 'eab615197efa946b7ae33af6c2ce1b61'
 
 const requests = {
     fetchTrending: `/trending/all/week?api_key=${Key}&language=en-Us`,

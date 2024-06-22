@@ -4,6 +4,8 @@ import HomePage from './Homepage';
 import LoginPage from './Login'; 
 import './App.css'; 
 import SignUpCard from './Signup';
+import SearchResults from './SearchResults';
+
 
 function App() {
   return (
@@ -12,6 +14,10 @@ function App() {
       <Route path="/Signup" element={<SignUpCard/>} />
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/search" element={<SearchResults />} />
+        
+
+
       </Routes>
     </Router>
   );
