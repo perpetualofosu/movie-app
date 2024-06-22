@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'; 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./navbar.css";
@@ -6,6 +7,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default function CustomNavbar() {
   const [staticnav, setNavbar] = useState("navbar-transparent");
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
 
   const changeNavbarBg = () => {
     if (window.scrollY >= 80) {
@@ -21,6 +24,21 @@ export default function CustomNavbar() {
       window.removeEventListener("scroll", changeNavbarBg);
     };
   }, []);
+
+  const handleSearchChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (query) {
+      navigate(`/search?query=${query}`);
+    }
+  };
+
+  const handleRecomClick = () => {
+    navigate('/search'); 
+  };
 
   return (
     <nav className={`navbar fixed-top ${staticnav} `}>
@@ -93,14 +111,16 @@ export default function CustomNavbar() {
           </a>
         </div>
         <div className="navbar-right">
-          <div className="search-container">
+          <form className="search-container" onSubmit={handleSearchSubmit}>
             <i className="bi bi-search"></i>
             <input
               type="text"
               className="search-input"
               placeholder="Search..."
+              value={query}
+              onChange={handleSearchChange}
             />
-          </div>
+          </form>
           <div className="dropdown">
             <button
               className="btn"
@@ -117,10 +137,10 @@ export default function CustomNavbar() {
           </div>
           <div className="dropdown">
             <button
-              className="btn "
+              className="btn recom"
               type="button"
               id="dropdownMenuButton2"
-              data-bs-toggle="dropdown"
+              onClick={handleRecomClick} 
               aria-expanded="false"
             >
               🤷🏼‍♀️
