@@ -1,0 +1,56 @@
+body {
+    background-image: url(./assets/signup3.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0; /* Ensure there is no default margin */
+}
+
+.container-fluid {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    width: 90%;
+    max-width: 450px;
+    box-sizing: border-box;
+}
+
+.glass-card .form-label {
+    color: #ffffff;
+}
+
+.glass-card input {
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-radius: 5px;
+    color: #000;
+}
+
+.glass-card input::placeholder {
+    color: #000;
+}
+
+.glass-card .btn-primary {
+    background-color: rgb(41 45 116);
+    border: none;
+    border-radius: 5px;
+}
+
+.glass-card .btn-primary:hover {
+    background-color: rgba(0, 123, 255, 1);
+}
