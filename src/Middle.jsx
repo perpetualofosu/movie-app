@@ -24,6 +24,7 @@ const Row = ({ title, fetchUrl, bigRow = false }) => {
     return (
         <div className="row">
             <h2>{title}</h2>
+            <div className='overflow-auto'>
             <div className="row__posters">
                 {movies.map(movie => (
                     (movie.poster_path || movie.backdrop_path) && (
@@ -41,8 +42,10 @@ const Row = ({ title, fetchUrl, bigRow = false }) => {
                                 <p>Rating: {movie.vote_average}</p>
                             </div>
                         </div>
+                        
                     )
                 ))}
+            </div>
             </div>
         </div>
     );
