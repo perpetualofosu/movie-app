@@ -1,0 +1,87 @@
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff6f61, #d63384);
+    animation: gradientBackground 10s ease infinite;
+    background-image:url(assets/stars.jpeg);
+  }
+  
+  @keyframes gradientBackground {
+    0% {
+      background: linear-gradient(135deg, #ff6f61, #d63384);
+    }
+    50% {
+      background: linear-gradient(135deg, #d63384, #6f42c1);
+    }
+    100% {
+      background: linear-gradient(135deg, #ff6f61, #d63384);
+    }
+  }
+  
+  .welcome-content {
+    text-align: center;
+    color: white;
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .welcome-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: slideInFromLeft 1s ease-out;
+  }
+  
+  @keyframes slideInFromLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .welcome-description {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    animation: slideInFromRight 1s ease-out;
+  }
+  
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .welcome-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .welcome-btn {
+    font-size: 1.2rem;
+    padding: 0.75rem 1.5rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .welcome-btn:hover {
+    transform: scale(1.1);
+  }
+  
