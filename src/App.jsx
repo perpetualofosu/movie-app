@@ -5,7 +5,7 @@ import LoginPage from './Login';
 import './App.css'; 
 import SignUpCard from './Signup';
 import SearchResults from './SearchResults';
-import Chatbot from './Chatbot';
+import WelcomePage from './Welcome';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/search" element={<SearchResults />} />
-        <Route path="/chatbot" element={<Chatbot />} />
+        <Route path='/welcome' element={<WelcomePage />} />
         
 
 
