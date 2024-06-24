@@ -3,13 +3,14 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDrHl3WH9f1AfWLBFK9Up2Q6ENgw2lXvos",
-    authDomain: "movie-app-poppins.firebaseapp.com",
-    projectId: "movie-app-poppins",
-    storageBucket: "movie-app-poppins.appspot.com",
-    messagingSenderId: "529877872439",
-    appId: "1:529877872439:web:d49582c5ec95301fa0b4b2"
-  };
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
+};
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);

@@ -1,33 +1,44 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './SignUpCard.css';
-import { auth } from './firebase';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { sendEmailVerification } from 'firebase/auth'; 
+import { auth, db } from './firebase'; 
+import { useNavigate } from 'react-router-dom'; 
 
 const SignUpCard = () => {
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
     const [error, setError] = useState('');
-
+    const navigate = useNavigate(); 
     const handleSignUp = async (event) => {
         event.preventDefault();
-        setError('');
-
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            await updateProfile(user, {
-                displayName: fullName,
-                phoneNumber: phoneNumber
+            
+            await sendEmailVerification(auth.currentUser); 
+            
+            await setDoc(doc(db, 'users', user.uid), {
+                fullName,
+                email,
+                createdAt: new Date()
             });
 
-            console.log('User signed up:', user);
+            console.log('User signed up and data saved:', user);
+            alert('Sign up successful! Verification email sent.');
+            navigate('/'); 
         } catch (error) {
+            if (error.code === 'auth/email-already-in-use') {
+                setError('Email address is already in use.');
+            } else {
+                setError(error.message);
+            }
             console.error('Error signing up:', error);
-            setError(error.message);
         }
     };
 
@@ -46,6 +57,7 @@ const SignUpCard = () => {
                             placeholder="Enter your full name" 
                             value={fullName} 
                             onChange={(e) => setFullName(e.target.value)} 
+                            required
                         />
                     </div>
                     <div className="mb-3">
@@ -57,17 +69,7 @@ const SignUpCard = () => {
                             placeholder="Enter your email" 
                             value={email} 
                             onChange={(e) => setEmail(e.target.value)} 
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="phoneNumber" className="form-label">Phone number</label>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="phoneNumber" 
-                            placeholder="Enter your phone number" 
-                            value={phoneNumber} 
-                            onChange={(e) => setPhoneNumber(e.target.value)} 
+                            required
                         />
                     </div>
                     <div className="mb-3">
@@ -79,6 +81,7 @@ const SignUpCard = () => {
                             placeholder="Enter your password" 
                             value={password} 
                             onChange={(e) => setPassword(e.target.value)} 
+                            required
                         />
                     </div>
                     <div className="d-grid">
