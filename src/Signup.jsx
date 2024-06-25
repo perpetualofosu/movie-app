@@ -6,6 +6,13 @@ import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
+if (typeof window !== 'undefined' && !window.PaystackPop) {
+  const script = document.createElement('script');
+  script.src = 'https://js.paystack.co/v1/inline.js';
+  script.async = true;
+  document.body.appendChild(script);
+}
+
 const SignUpCard = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -41,7 +48,7 @@ const SignUpCard = () => {
 
       console.log('User signed up and data saved:', user);
       alert('Sign up successful! Verification email sent.');
-      navigate('/'); 
+      navigate('/');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setError('Email address is already in use.');
@@ -53,37 +60,39 @@ const SignUpCard = () => {
   };
 
   const handlePaystackPayment = (userId) => {
-    const handler = PaystackPop.setup({
-      key: 'pk_test_966b4c5fff18686ed5a93938cc228507e0bc9817', 
-      email,
-      amount: getAmountForPlan(subscriptionPlan), 
-      currency: 'GH', 
-      callback: async (response) => {
-        
-        await setDoc(doc(db, 'payments', response.reference), {
-          userId,
-          reference: response.reference,
-          status: 'success',
-          plan: subscriptionPlan,
-          createdAt: new Date()
-        });
+    if (window.PaystackPop) {
+      const handler = window.PaystackPop.setup({
+        key: 'pk_test_966b4c5fff18686ed5a93938cc228507e0bc9817',
+        email,
+        amount: getAmountForPlan(subscriptionPlan) * 100, // Paystack expects amount in kobo
+        currency: 'GHS',
+        callback: async (response) => {
+          await setDoc(doc(db, 'payments', response.reference), {
+            userId,
+            reference: response.reference,
+            status: 'success',
+            plan: subscriptionPlan,
+            createdAt: new Date()
+          });
 
-        alert('Payment successful! Subscription activated.');
-      },
-      onClose: () => {
-        alert('Payment was not completed.');
-      }
-    });
+          alert('Payment successful! Subscription activated.');
+        },
+        onClose: () => {
+          alert('Payment was not completed.');
+        }
+      });
 
-    handler.openIframe();
+      handler.openIframe();
+    } else {
+      console.error('PaystackPop is not loaded');
+    }
   };
 
   const getAmountForPlan = (plan) => {
-    
     const planAmounts = {
-      basic: 500, 
-      standard: 1000, 
-      premium: 2000 
+      basic: 500,
+      standard: 1000,
+      premium: 2000
     };
 
     return planAmounts[plan];
@@ -91,6 +100,7 @@ const SignUpCard = () => {
 
   return (
     <div className="container-fluid styles">
+      <h1> Grab some <span className="emoji popcorn">🍿</span> and let's get <span className="emoji poppin">Poppin 😉</span> </h1>
       <div className="card glass-card p-4">
         <h3 className="text-center mb-3">Sign Up</h3>
         {error && <div className="alert alert-danger">{error}</div>}
@@ -137,9 +147,9 @@ const SignUpCard = () => {
               onChange={(e) => setSubscriptionPlan(e.target.value)}
             >
               <option value="">Select a plan</option>
-              <option value="basic">Basic - 500 GH</option>
-              <option value="standard">Standard - 1000 GH</option>
-              <option value="premium">Premium - 2000 GH</option>
+              <option value="basic">Basic - 500 GHS</option>
+              <option value="standard">Standard - 1000 GHS</option>
+              <option value="premium">Premium - 2000 GHS</option>
             </select>
           </div>
           <div className="mb-3">
