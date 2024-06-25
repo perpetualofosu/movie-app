@@ -9,6 +9,11 @@ const requests = {
     fetchHorrorMovies: `/discover/movie?api_key=${Key}&with_genres=27`,
     fetchRomanceMovies: `/discover/movie?api_key=${Key}&with_genres=10749`,
     fetchDocumentaries: `/discover/movie?api_key=${Key}&with_genres=99`,
+    fetchTVShows: `/discover/tv?api_key=${Key}&language=en-US`,
+  fetchMovies: `/discover/movie?api_key=${Key}&language=en-US`,
+  fetchRatings: `/movie/top_rated?api_key=${Key}&language=en-US`,
+  fetchAmazonMovies: `/discover/movie?api_key=${Key}&with_provider=8`, // Custom URL for My List
+  fetchByLanguage: `/discover/movie?api_key=${Key}&with_original_language=es`, // Example for Spanish
 }
 
 export default requests

@@ -55,10 +55,11 @@
     font-family: cursive;
  }
 .offcanvas-header{
-    background-color: rgb(52, 2, 39);
+    background-color:transparent;
 }
  .offcanvas-body{
-    background-image: url('/src/Polygon Luminary.svg');
+  background: transparent;
+    
     color:white; 
     background-size: cover; 
     background-position: center;
@@ -78,4 +79,8 @@
  .btn{
     background-color: transparent;
     border: none;
+ }
+
+ .off-body.show{
+  width: 300px;
  }

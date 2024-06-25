@@ -4,11 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./navbar.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { useCategory } from './CategoryContext';
 
 export default function CustomNavbar() {
   const [staticnav, setNavbar] = useState("navbar-transparent");
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+  const { setCategory } = useCategory();
 
   const changeNavbarBg = () => {
     if (window.scrollY >= 80) {
@@ -36,12 +38,17 @@ export default function CustomNavbar() {
     }
   };
 
+  const handleCategoryClick = (category) => {
+    setCategory(category);
+    navigate('/');
+  };
+
   const handleRecomClick = () => {
-    navigate('/search'); 
+    navigate('/search');
   };
 
   return (
-    <nav className={`navbar fixed-top ${staticnav} `}>
+    <nav className={`navbar fixed-top ${staticnav}`}>
       <div className="container">
         <div className="navbar-left">
           <button
@@ -55,7 +62,7 @@ export default function CustomNavbar() {
           </button>
 
           <div
-            className="offcanvas offcanvas-start"
+            className="offcanvas offcanvas-start glass-card off-body"
             data-bs-scroll="true"
             data-bs-backdrop="false"
             tabIndex="-1"
@@ -78,29 +85,29 @@ export default function CustomNavbar() {
             <div className="offcanvas-body">
               <ul className="sidebarlist">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <button className="dropdown-item" onClick={() => handleCategoryClick('TV Shows')}>
                     TV Shows
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <button className="dropdown-item" onClick={() => handleCategoryClick('Movies')}>
                     Movies
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Latest
-                  </a>
+                  <button className="dropdown-item" onClick={() => handleCategoryClick('Latest')}>
+                    Ratings
+                  </button>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    My List
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
+                  <button className="dropdown-item" onClick={() => handleCategoryClick('Browse by Language')}>
                     Browse by Language
-                  </a>
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => handleCategoryClick('My List')}>
+                    Only on Poppins
+                  </button>
                 </li>
               </ul>
             </div>
