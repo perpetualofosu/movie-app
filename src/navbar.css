@@ -51,8 +51,11 @@
   }
 
   .navbar-brand{
-    color: purple;
+    color: #3d25b5;
     font-family: cursive;
+    font-size: 30px;
+    font-weight: 700;
+    padding-right: 10px;
  }
 .offcanvas-header{
     background-color:transparent;
@@ -83,4 +86,8 @@
 
  .off-body.show{
   width: 300px;
+ }
+ 
+ .glass{
+  background-color: transparent;
  }

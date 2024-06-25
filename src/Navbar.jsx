@@ -51,6 +51,9 @@ export default function CustomNavbar() {
     <nav className={`navbar fixed-top ${staticnav}`}>
       <div className="container">
         <div className="navbar-left">
+        <a className="navbar-brand glass" href="#">
+            Poppins
+          </a>
           <button
             className="btn btn-secondary"
             type="button"
@@ -113,9 +116,7 @@ export default function CustomNavbar() {
             </div>
           </div>
 
-          <a className="navbar-brand" href="#">
-            Poppins
-          </a>
+          
         </div>
         <div className="navbar-right">
           <form className="search-container" onSubmit={handleSearchSubmit}>
