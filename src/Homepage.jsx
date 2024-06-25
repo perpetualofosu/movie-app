@@ -12,7 +12,7 @@ const HomePage = () => {
       <div className="movies">
         <div className="overflow-auto">
         <Row
-          title="NETFLIX ORIGINALS"
+          title="POPPINS ORIGINALS"
           fetchUrl={requests.fetchNetflixOriginals}
           bigRow
         />
