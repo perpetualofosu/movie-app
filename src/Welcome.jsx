@@ -1,31 +1,20 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './welcome.css'; // Import the CSS file for styling
+import './welcome.css' 
 
-const WelcomePage = () => {
-  const navigate = useNavigate();
-
-  const handleSignUp = () => {
-    navigate('/signup');
-  };
-
-  const handleLogin = () => {
-    navigate('/login');
-  };
-
+const Welcome = () => {
   return (
-    <div className="welcome-container">
-      <div className="welcome-content">
-        <h1 className="welcome-title">Welcome to Poppins World</h1>
-        <p className="welcome-description">Discover and explore the world of movies. Sign up or log in to get started!</p>
-        <div className="welcome-buttons">
-          <button className="btn btn-primary welcome-btn" onClick={handleSignUp}>Sign Up</button>
-          <button className="btn btn-secondary welcome-btn" onClick={handleLogin}>Log In</button>
-        </div>
+    <div className='blur'>
+      <div className="wel-container">
+        <h1>Discover Popins - Your Ultimate Movie Destination</h1>
+        <p>Unlock a world of cinematic delight with Poppins, the premier movie streaming site that offers an unbeatable selection at an affordable price. Dive in and enjoy your favorite films in style.
+</p>
+<div className="wel-buttons">
+  <button id='button'>Join now</button>
+  <button id='button'>Browse Library</button>
+</div>
       </div>
     </div>
-  );
-};
+  )
 
-export default WelcomePage;
+}
+export default Welcome
