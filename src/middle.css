@@ -2,7 +2,6 @@
 .row {
     color: white;
     margin-left: 10px;
-    width: 400%;
     overflow-y: hidden;
     overflow-x: scroll;
     background-color:  rgba(0, 0, 0, 0.8);;
@@ -11,7 +10,7 @@
 .row__title {
     position: -webkit-sticky;
     position: sticky;
-    top: 0;
+    top: 10px;
     padding: 10px 0;
     z-index: 100;
     margin-left: 0;
@@ -24,6 +23,7 @@
     overflow-y: hidden;
     overflow-x: scroll;
     padding: 10px 0; 
+    width: 400%;
 }
 
 .row__poster {
@@ -90,6 +90,17 @@
 }
 
 .movies {
-    overflow: hidden;
+    overflow: auto;
     background: url('./assets/stars.jpeg');
+}
+
+#root{
+    background: url('./assets/stars.jpeg');
+    color: white;
+    
+}
+
+
+.big{
+    width: 300px;
 }

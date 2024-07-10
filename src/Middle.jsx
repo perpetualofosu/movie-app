@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import axios from './axios';
 import './middle.css';
+import { useTranslation } from 'react-i18next';
 
 const Row = ({ title, fetchUrl, bigRow = false }) => {
     const [movies, setMovies] = useState([]);
