@@ -6,6 +6,7 @@
   background-repeat: no-repeat;
   background-position: top;
   display: flex; 
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -14,7 +15,7 @@
   text-align: center;
   padding: 50px;
   font-family: Arial, sans-serif;
-  background-color: rgba(4, 13, 35, 0.8);
+  background-color: rgba(3, 4, 7, 0.8);
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   width: 100%; 
@@ -24,25 +25,83 @@
   justify-content: center;
   align-items: center;
 }
+.word{
+  text-align: left;
+  max-width: 800px;
+}
 
 .wel-buttons {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
+  margin-right: 510px;
+  
+}
+
+#button-sign{
+  background-color: #596ed8;
+  color: white;
+  width: 100px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 7px;
 }
 
 #button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #2d2267;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+  background-color: #000001;
+  color: #596ed8;
+  border-radius: 7px;
   transition: background-color 0.3s;
+  width: 100px;
+  border: 4px solid #596ed8;
 }
 
 button:hover {
   background-color: #0056b3;
 }
 
+h1{
+  font-size: 60px;
+  font-weight: 550;
+  padding-bottom: 30px;
+}
+
+p{
+  font-size: 18px;
+  color: rgb(220, 219, 219);
+}
+
+
+.bottom{
+  background: linear-gradient( #020632, #000000);
+  width: 100%;
+  height: 400px;
+}
+
+.column{
+  display: flex;
+  max-width: 900px;
+  margin-right: auto;
+  margin-left: auto;
+  gap: 20px;
+  padding-bottom: 30px;
+}
+.column p{
+  color: rgb(185, 185, 185);
+  
+}
+
+.column h3{
+  color: rgb(219, 217, 217);
+}
+.bottom h2{
+  display: flex;
+    justify-content: center;
+    margin-top: 70px;
+    margin-bottom: 40px;
+    font-size: 42px;
+ font-weight: 550;
+}
