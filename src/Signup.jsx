@@ -1,34 +1,56 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './SignUpCard.css';
+import { useNavigate } from 'react-router-dom';
 import { auth, db } from './firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
-
-if (typeof window !== 'undefined' && !window.PaystackPop) {
-  const script = document.createElement('script');
-  script.src = 'https://js.paystack.co/v1/inline.js';
-  script.async = true;
-  document.body.appendChild(script);
-}
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './SignUpCard.css';
 
 const SignUpCard = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  const [subscriptionPlan, setSubscriptionPlan] = useState('');
-  const [error, setError] = useState('');
+
+  const [fullNameError, setFullNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [generalError, setGeneralError] = useState('');
   const navigate = useNavigate();
 
   const handleSignUp = async (event) => {
     event.preventDefault();
 
-    if (!subscriptionPlan) {
-      setError('Please select a subscription plan.');
-      return;
+    setFullNameError('');
+    setEmailError('');
+    setPhoneNumberError('');
+    setPasswordError('');
+    setGeneralError('');
+
+    let hasError = false;
+
+    if (!fullName) {
+      setFullNameError('Full name is required.');
+      hasError = true;
     }
+
+    if (!email) {
+      setEmailError('Email address is required.');
+      hasError = true;
+    }
+
+    if (!phoneNumber) {
+      setPhoneNumberError('Phone number is required.');
+      hasError = true;
+    }
+
+    if (!password) {
+      setPasswordError('Password is required.');
+      hasError = true;
+    }
+
+    if (hasError) return;
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -40,81 +62,39 @@ const SignUpCard = () => {
         fullName,
         email,
         phoneNumber,
-        subscriptionPlan,
         createdAt: new Date()
       });
 
-      handlePaystackPayment(user.uid);
-
-      console.log('User signed up and data saved:', user);
-      alert('Sign up successful! Verification email sent.');
-      navigate('/');
+      // Redirect to verification page
+      navigate('/verify-email'); 
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
-        setError('Email address is already in use.');
+        setEmailError('Email address is already in use.');
       } else {
-        setError(error.message);
+        setGeneralError(error.message);
       }
       console.error('Error signing up:', error);
     }
   };
 
-  const handlePaystackPayment = (userId) => {
-    if (window.PaystackPop) {
-      const handler = window.PaystackPop.setup({
-        key: 'pk_test_966b4c5fff18686ed5a93938cc228507e0bc9817',
-        email,
-        amount: getAmountForPlan(subscriptionPlan) * 100, // Paystack expects amount in kobo
-        currency: 'GHS',
-        callback: async (response) => {
-          await setDoc(doc(db, 'payments', response.reference), {
-            userId,
-            reference: response.reference,
-            status: 'success',
-            plan: subscriptionPlan,
-            createdAt: new Date()
-          });
-
-          alert('Payment successful! Subscription activated.');
-        },
-        onClose: () => {
-          alert('Payment was not completed.');
-        }
-      });
-
-      handler.openIframe();
-    } else {
-      console.error('PaystackPop is not loaded');
-    }
-  };
-
-  const getAmountForPlan = (plan) => {
-    const planAmounts = {
-      basic: 500,
-      standard: 1000,
-      premium: 2000
-    };
-
-    return planAmounts[plan];
-  };
-
   return (
     <div className="container-fluid styles">
-      <h1> Grab some <span className="emoji popcorn">🍿</span> and let's get <span className="emoji poppin">Poppin 😉</span> </h1>
+      <h1>Grab some <span className="emoji popcorn">🍿</span> and let's get <span className="emoji poppin">Poppin 😉</span></h1>
       <div className="card glass-card p-4">
         <h3 className="text-center mb-3">Sign Up</h3>
-        {error && <div className="alert alert-danger">{error}</div>}
+        {generalError && <div className="error-message">{generalError}</div>}
         <form onSubmit={handleSignUp}>
           <div className="mb-3">
-            <label htmlFor="fullName" className="form-label">Full Name</label>
+            <label htmlFor="fullName" className="form-label">Name</label>
             <input
               type="text"
               className="form-control"
               id="fullName"
-              placeholder="Enter your full name"
+              placeholder="Enter your name"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
             />
+            {fullNameError && <div className="error-message">{fullNameError}</div>}
           </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email address</label>
@@ -126,6 +106,7 @@ const SignUpCard = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            {emailError && <div className="error-message">{emailError}</div>}
           </div>
           <div className="mb-3">
             <label htmlFor="phoneNumber" className="form-label">Phone number</label>
@@ -137,20 +118,7 @@ const SignUpCard = () => {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="subscriptionPlan" className="form-label">Subscription Plan</label>
-            <select
-              className="form-control"
-              id="subscriptionPlan"
-              value={subscriptionPlan}
-              onChange={(e) => setSubscriptionPlan(e.target.value)}
-            >
-              <option value="">Select a plan</option>
-              <option value="basic">Basic - 500 GHS</option>
-              <option value="standard">Standard - 1000 GHS</option>
-              <option value="premium">Premium - 2000 GHS</option>
-            </select>
+            {phoneNumberError && <div className="error-message">{phoneNumberError}</div>}
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
@@ -162,6 +130,7 @@ const SignUpCard = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {passwordError && <div className="error-message">{passwordError}</div>}
           </div>
           <div className="d-grid">
             <button type="submit" className="btn btn-primary">Sign Up</button>
