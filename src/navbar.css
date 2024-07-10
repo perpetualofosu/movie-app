@@ -6,6 +6,7 @@
   .navbar-right {
     display: flex;
     align-items: center;
+    font-size: 25px;
   }
   
   .search-container {
@@ -15,6 +16,7 @@
   .search-icon {
     cursor: pointer;
     margin-right: 10px;
+    font-size: 25px;
   }
   
   .search-input {
@@ -53,8 +55,8 @@
   .navbar-brand{
     color: #3d25b5;
     font-family: cursive;
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 40px;
+    font-weight: 900;
     padding-right: 10px;
  }
 .offcanvas-header{
@@ -91,3 +93,12 @@
  .glass{
   background-color: transparent;
  }
+ .user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.logout{
+  margin-top: 560px;
+}
