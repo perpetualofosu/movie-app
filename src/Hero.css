@@ -1,53 +1,59 @@
-
-.Banner{
-    
-    position: relative;
-    height: 448px;
-    object-fit: contain;
-    background-size: cover;
-    background-position: center;
-    color: white;
-
+.Banner {
+  background-position: top center; 
+  position: relative;
+  height: 500px;
+  object-fit: cover;
+  background-size: cover; 
+  color: white;
 }
+
 .Movie-info {
-    display: flex;
-    flex-direction: column;
-    padding-left: 20px;
-    padding-top:220px;
-  }
-.title{
-    font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  padding-top: 220px;
+  max-width: 500px;
 }
-  
 
-  
-  .buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .rating {
-    position: absolute;
-    top: 300px;
-    right: 20px; 
-  }
-  
-  .play, .more{
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .rating-btn {
-    background-color: transparent;
-    border: none;}
+.title {
+  font-size: 3rem;
+}
 
-    .fade {
-      height: 7.4rem;
-      background-image: linear-gradient(
-        180deg,
-        transparent,
-        rgba(37, 37, 37, 0.61),
-        #111
-      );
-    }
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.rating {
+  position: absolute;
+  top: 300px;
+  right: 20px;
+}
+
+.play, .more {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.play {
+  width: 100px;
+  padding-left: 1rem;
+  border-radius: 7px;
+}
+
+.more {
+  color: white;
+  background-color: rgb(42 42 128 / 80%);
+  padding: 10px;
+  border-radius: 7px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #000001;
+  color: #596ed8;
+  border-radius: 7px;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  border: 1px solid #596ed8;
+}

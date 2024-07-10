@@ -30,7 +30,7 @@ function Hero() {
   }
 
   const handleMoreInfoClick = () => {
-    navigate(`/movie/${movie.id}`);
+    navigate(`/movie/${movie.id}`); 
   };
 
   return (
@@ -39,7 +39,7 @@ function Hero() {
       style={{
         backgroundSize: "cover",
         backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
-        backgroundPosition: "center center",
+        backgroundPosition: "top center",
       }}
     >
       <div className="Movie-info">
@@ -53,6 +53,7 @@ function Hero() {
           <button className="play"><i className="bi bi-play-fill"></i>Play</button>
           <button className="more" onClick={handleMoreInfoClick}><i className="bi bi-info-circle-fill"></i>More Info</button>
         </div>
+        
       </div>
       <div className="fade"></div>
     </div>
