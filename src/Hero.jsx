@@ -4,9 +4,13 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import './Hero.css'; 
 import axios from './axios';
 import requests from './requests';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 function Hero() {
   const [movie, setMovie] = useState({});
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchMovie() {
@@ -24,6 +28,10 @@ function Hero() {
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + '...' : string;
   }
+
+  const handleMoreInfoClick = () => {
+    navigate(`/movie/${movie.id}`);
+  };
 
   return (
     <div 
@@ -43,10 +51,7 @@ function Hero() {
         </div>
         <div className="buttons">
           <button className="play"><i className="bi bi-play-fill"></i>Play</button>
-          <button className="more"><i className="bi bi-info-circle-fill"></i>More Info</button>
-        </div>
-        <div className="rating">
-          <button className="rating-btn"><i className="bi bi-reply"></i></button>
+          <button className="more" onClick={handleMoreInfoClick}><i className="bi bi-info-circle-fill"></i>More Info</button>
         </div>
       </div>
       <div className="fade"></div>
