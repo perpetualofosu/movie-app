@@ -15,11 +15,11 @@ const HomePage = () => {
       case 'Movies':
         return requests.fetchMovies;
       case 'Ratings':
-        return requests.fetchLatest;
-      case 'Only on Poppins':
+        return requests.fetchRatings;  
+      case 'Only On Popins':
         return requests.fetchAmazonMovies;
       case 'Browse by Language':
-        return requests.fetchByLanguage;
+        return requests.fetchByLanguage;  
       default:
         return requests.fetchTrending;
     }
@@ -32,7 +32,7 @@ const HomePage = () => {
       <div className="movies">
         <div className="overflow-auto">
           <Row
-            title={category || "POPPINS ORIGINALS"}
+            title={category || "POPINS ORIGINALS"}
             fetchUrl={getFetchUrl()}
             bigRow
           />
@@ -41,7 +41,6 @@ const HomePage = () => {
         <div className="overflow-auto"><Row title="Action Movies" fetchUrl={requests.fetchActionMovies} /></div>
         <div className="overflow-auto"><Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies} /></div>
         <div className="overflow-auto"><Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} /></div>
-        
 
       </div>
     </div>
@@ -49,3 +48,5 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
