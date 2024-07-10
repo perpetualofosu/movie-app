@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './middle.css';
 
@@ -44,29 +44,42 @@ function SearchResults() {
 
   return (
     <div className="container mt-5">
+      <Link to="/" className="button-link back">
+        <button id='button'>Back</button>
+      </Link>
+     
       <div className="row mt-4">
         <h2>Search Results</h2>
+        <div className="search-wrapper overflow-auto">
         <div className="row__posters">
-          {movies.map((movie) => (
-            (movie.poster_path || movie.backdrop_path) && (
-              <div
-                className={`row__poster ${movie.poster_path ? "row__posterLarge" : ""}`}
-                key={movie.id}
-              >
-                <img
-                  src={`${IMAGE_BASE_URL}${movie.poster_path || movie.backdrop_path}`}
-                  alt={movie.title || movie.name}
-                />
-                <div className="row__overlay">
-                  <h3>{movie.title || movie.name}</h3>
-                  <p>{movie.overview}</p>
-                  <p>Rating: {movie.vote_average}</p>
+          {movies.length > 0 ? (
+            movies.map((movie) => (
+              (movie.poster_path || movie.backdrop_path) && (
+                <div
+                  className={`row__poster ${movie.poster_path ? "row__posterLarge" : ""}`}
+                  key={movie.id}
+                >
+                  <img
+                    src={`${IMAGE_BASE_URL}${movie.poster_path || movie.backdrop_path}`}
+                    alt={movie.title || movie.name}
+                  />
+                  <div className="row__overlay">
+                    <h3>{movie.title || movie.name}</h3>
+                    <p>{movie.overview}</p>
+                    <p>Rating: {movie.vote_average}</p>
+                  </div>
                 </div>
-              </div>
-            )
-          ))}
+              )
+            ))
+          ) : (
+            <p>No search results found.</p>
+          )}
         </div>
+        
+       
       </div>
+      </div>
+     
 
       {Object.keys(similarMovies).length > 0 && (
         <div className="mt-4">
@@ -74,24 +87,30 @@ function SearchResults() {
           {Object.keys(similarMovies).map((movieId) => (
             <div key={movieId} className="mb-4">
               <h3>Based on "{movies.find(movie => movie.id === parseInt(movieId))?.title}"</h3>
+              <div className="search-wrapper overflow-auto">
               <div className="row__posters">
-                {similarMovies[movieId].map((movie) => (
-                  (movie.poster_path || movie.backdrop_path) && (
-                    <div
-                      className={`row__poster ${movie.poster_path ? "row__posterLarge" : ""}`}
-                      key={movie.id}
-                    >
-                      <img
-                        src={`${IMAGE_BASE_URL}${movie.poster_path || movie.backdrop_path}`}
-                        alt={movie.title || movie.name}
-                      />
-                      <div className="row__overlay">
-                        <h3>{movie.title || movie.name}</h3>
-                        <p>Rating: {movie.vote_average}</p>
+                {similarMovies[movieId].length > 0 ? (
+                  similarMovies[movieId].map((movie) => (
+                    (movie.poster_path || movie.backdrop_path) && (
+                      <div
+                        className={`row__poster ${movie.poster_path ? "row__posterLarge" : ""}`}
+                        key={movie.id}
+                      >
+                        <img
+                          src={`${IMAGE_BASE_URL}${movie.poster_path || movie.backdrop_path}`}
+                          alt={movie.title || movie.name}
+                        />
+                        <div className="row__overlay">
+                          <h3>{movie.title || movie.name}</h3>
+                          <p>Rating: {movie.vote_average}</p>
+                        </div>
                       </div>
-                    </div>
-                  )
-                ))}
+                    )
+                  ))
+                ) : (
+                  <p>No similar movies found.</p>
+                )}
+              </div>
               </div>
             </div>
           ))}
