@@ -21,7 +21,7 @@ const ProfilePage = () => {
   const handleDoubleClick = () => {
     const selectedAvatar = users[active].image;
     localStorage.setItem('selectedAvatar', selectedAvatar);
-    navigate('/'); // Redirect to homepage on double-click
+    navigate('/home'); // Redirect to homepage on double-click
   };
 
   useEffect(() => {

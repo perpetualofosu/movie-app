@@ -26,10 +26,10 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUpCard />} />
               <Route path="/verify-email" element={<VerificationPage />} />
-              <Route path="/" element={<HomePage />} />
+              <Route path="/home" element={<HomePage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/search" element={<SearchResults />} />
-              <Route path="/welcome" element={<WelcomePage />} />
+              <Route path="/" element={<WelcomePage />} />
               <Route path="/profile-settings" element={<ProfileSettings />} />
               <Route path="/movie/:id" element={<MovieDetails />} />
             </Routes>
