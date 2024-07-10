@@ -1,23 +1,43 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { auth } from './firebase';
+import { auth, db } from './firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 import './SignUpCard.css';
-
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    setEmailError('');
+    setPasswordError('');
+    
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate('/'); 
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Fetch user's full name from Firestore
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (userDoc.exists()) {
+        const fullName = userDoc.data().fullName;
+        // Store  name in local storage or context
+        localStorage.setItem('fullName', fullName);
+      }
+
+      navigate('/profile'); 
     } catch (error) {
-      setError(error.message);
+      if (error.code.includes('user')) {
+        setEmailError(error.message);
+      } else if (error.code.includes('password')) {
+        setPasswordError(error.message);
+      } else {
+        setEmailError('Failed to sign in. Please check your credentials.');
+      }
     }
   };
 
@@ -26,7 +46,6 @@ const Login = () => {
       <h1> Grab some <span className="emoji popcorn">🍿</span> and let's get <span className="emoji poppin">Poppin 😉</span> </h1>
       <div className="card glass-card p-4">
         <h3 className="text-center mb-3">Login</h3>
-        {error && <div className="alert alert-danger">{error}</div>}
         <form onSubmit={handleLogin}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email address</label>
@@ -38,6 +57,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            {emailError && <div className="error-message">{emailError}</div>}
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
@@ -49,6 +69,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {passwordError && <div className="error-message">{passwordError}</div>}
           </div>
           <div className="d-grid">
             <button type="submit" className="btn btn-primary">Login</button>
